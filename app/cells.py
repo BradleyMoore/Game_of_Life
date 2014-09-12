@@ -10,7 +10,7 @@ class Cell(object):
         self.pos = (xpos, ypos)
 
 
-    def check_neighbors(self, xpos, ypos):
+    def check_neighbor(self, xpos, ypos):
         if life[xpos][ypos].satus == 1:
             self.neighbors = self.neighbors + 1
 
