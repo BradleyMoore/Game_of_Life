@@ -1,50 +1,61 @@
 class Cell(object):
 
     def __init__(self, xpos, ypos, numtobirth, numtolive):
+        self.possible_neighbors = []
         self.neighbors = 0
         self.numtobirth = numtobirth
         self.numtolive = numtolive
-        self.status = ''
+        self.status = 0
         self.xpos = xpos
         self.ypos = ypos
         self.pos = (xpos, ypos)
 
 
-    def check_neighbor(self, xpos, ypos):
-        if life[xpos][ypos].satus == 1:
+    def check_neighbor(self, neighbor):
+        if neighbor.satus == 1:
             self.neighbors = self.neighbors + 1
 
 
-    def find_neighbors(self):
+    def find_neighbors(self, hsize, vsize):
+        self.possible_neighbors = []
+        self.neighbors = 0
         if self.xpos != 0:
-            check_neighbors(self.xpos-1, self.ypos)
+            self.possible_neighbors.append((self.xpos-1, self.ypos))
             if self.ypos != 0:
-                check_neightbors(self.xpos-1, self.ypos-1)
-            if self.ypos != VSIZE:
-                check_neightbors(self.xpos-1, self.ypos+1)
+                self.possible_neighbors.append((self.xpos-1, self.ypos-1))
+            if self.ypos != vsize:
+                self.possible_neighbors.append((self.xpos-1, self.ypos+1))
 
-        if self.xpos != HSIZE-1:
-            check_neighbors(self.xpo+1, self.ypos)
+        if self.xpos != hsize-1:
+            self.possible_neighbors.append((self.xpos+1, self.ypos))
             if self.ypos != 0:
-                check_neightbors(self.xpos+1, self.ypos-1)
-            if self.ypos != VSIZE:
-                check_neightbors(self.xpos+1, self.ypos+1)
+                self.possible_neighbors.append((self.xpos+1, self.ypos-1))
+            if self.ypos != vsize:
+                self.possible_neighbors.append((self.xpos+1, self.ypos+1))
 
         if self.ypos != 0:
-            check_neighbors(self.xpos, self.ypos-1)
+            self.possible_neighbors.append((self.xpos, self.ypos-1))
 
-        if self.ypos != VSIZE-1:
-            check_neighbors(self.xpos, self.ypos+1)
+        if self.ypos != vsize-1:
+            self.possible_neighbors.append((self.xpos, self.ypos+1))
+
+        return self.possible_neighbors
 
 
-    def be_born(self, neighbors):
+    def check_for_birth(self):
         if self.status == 0:
-            if neighbors in self.numtobirth:
+            if self.neighbors in self.numtobirth:
                 self.status = 1
 
 
-    def die(self, neighbors):
-        if self.status == 1: 
-            if neighbors not in self.numtolive:
+    def check_for_death(self):
+            if self.neighbors not in self.numtolive:
                 self.status = 0
+
+
+    def reap_and_sew(self):
+        if self.status == 1: 
+            check_for_death()
+        else:
+            check_for_birth()
 
