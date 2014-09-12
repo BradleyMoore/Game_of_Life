@@ -3,9 +3,9 @@ import sys
 
 
 class Board(object):
-    def __init__(self):
-        self.hsize = 80
-        self.vsize = 80
+    def __init__(self, hsize, vsize):
+        self.hsize = hsize
+        self.vsize = vsize
         self.board = []
 
     def create(self):
@@ -16,8 +16,4 @@ class Board(object):
             for j in xrange(self.hsize):
                 print(self.board[i][j], end='')
             print('', end='\n')
-
-b = Board()
-b.create()
-b.show()
 

@@ -1,9 +1,12 @@
 class Cell(object):
-    def __init__(self):
+    def __init__(self, xpos, ypos, numtobirth, numtolive):
         self.neighbors = 0
-        self.numtobirth = (3)
-        self.numtolive = (2, 3)
+        self.numtobirth = numtobirth
+        self.numtolive = numtolive
         self.status = ''
+        self.xpos = xpos
+        self.ypos = ypos
+        self.pos = [self.xpos, self.ypos]
 
     def count_neighbors(self, live_board):
 
