@@ -34,18 +34,32 @@ living_cells = find_life()
 
 while __name__ == '__main__':
 
-    living_cells = []
     neighbors = []
+    next_round_life = []
 
     for location in living_cells:
         x, y = location
         cell = life[x][y]
         neighbors.extend(cell.find_neighbors(HSIZE, VSIZE))
         
+
     for location in set(neighbors):
         x, y = location
         cell = life[x][y]
         cell.reap_and_sow()
+        if cell.status == 1:
+            next_round_life.append(cell.pos)
+
+    for location in living_cells:
+        x, y = location
+        cell = life[x][y]
+        cell.reap_and_sow()
+        if cell.status == 1:
+            next_round_life.append(cell.pos)
+
+    living_cells = []
+    living_cells = next_round_life
+    next_round_life = []
 
     for i in xrange(VSIZE):
         for j in xrange(HSIZE):
@@ -56,4 +70,3 @@ while __name__ == '__main__':
                 print('O', end='')
             print('\n')
     os.system('clear')
-
