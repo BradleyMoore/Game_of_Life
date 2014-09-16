@@ -15,26 +15,45 @@ def let_there_be_life(hsize, vsize, birth_neighbors, life_neighbors):
 
 
 life = let_there_be_life(HSIZE, VSIZE, NEIGHBORS_FOR_BIRTH, NEIGHBORS_FOR_LIFE)
-possible_neighbors = []
 
 
-while __name__ == '__main__':
+def find_life():
+
+    living_cells = []
     for i in xrange(VSIZE):
         for j in xrange(HSIZE):
             cell = life[j][i]
-            possible_neighbors = []
+            if cell.status == 1:
+                living_cells.append(cell.pos)
 
-            possible_neighbors = cell.find_neighbors(HSIZE, VSIZE)
+    return living_cells
 
-            for neighbor in possible_neighbors:
-                cell.check_neighbor(life[neighbor[0]][neighbor[1]])
 
-            cell.reap_and_sew()
+possible_neighbors = []
+living_cells = find_life()
 
+while __name__ == '__main__':
+
+    living_cells = []
+    neighbors = []
+
+    for location in living_cells:
+        x, y = location
+        cell = life[x][y]
+        neighbors.extend(cell.find_neighbors(HSIZE, VSIZE))
+        
+    for location in set(neighbors):
+        x, y = location
+        cell = life[x][y]
+        cell.reap_and_sow()
+
+    for i in xrange(VSIZE):
+        for j in xrange(HSIZE):
+            cell = life[j][i]
             if cell.status == 0:
                 print(' ', end='')
             else:
                 print('O', end='')
-        print('\n')
+            print('\n')
     os.system('clear')
 
