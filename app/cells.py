@@ -3,9 +3,9 @@ class Cell(object):
     def __init__(self, xpos, ypos, numtobirth, numtolive):
         self.neighbors = []
         self.num_of_neighbors = 0
+        self.status = 0
         self.numtobirth = numtobirth
         self.numtolive = numtolive
-        self.status = 0
         self.xpos = xpos
         self.ypos = ypos
         self.pos = (xpos, ypos)
@@ -16,6 +16,7 @@ class Cell(object):
         self.sum_of_neighbors = 0
         possible_neighbors = []
         self.neighbors = []
+        to_remove = []
         
         tl = (self.xpos-1, self.ypos-1)
         t = (self.xpos, self.ypos-1)
@@ -26,31 +27,37 @@ class Cell(object):
         b = (self.xpos, self.ypos+1)
         br = (self.xpos+1, self.ypos+1)
 
-        if self.xpos != 0:
-            self.possible_neighbors.append(l)
-            if self.ypos != 0:
-                self.possible_neighbors.append(tl)
-            elif self.ypos != vsize:
-                self.possible_neighbors.append(bl)
-        elif self.xpos != hsize:
-            self.possible_neighbors.append(r)
-            if self.ypos != 0:
-                self.possible_neighbors.append(tr)
-            elif self.ypos != vsize:
-                self.possible_neighbors.append(br)
+        possible_neighbors.append(tl)
+        possible_neighbors.append(t)
+        possible_neighbors.append(tr)
+        possible_neighbors.append(l)
+        possible_neighbors.append(r)
+        possible_neighbors.append(bl)
+        possible_neighbors.append(b)
+        possible_neighbors.append(br)
 
-        if self.ypos != 0:
-            self.possible_neighbors.append(t)
-            if self.xpos != 0:
-                self.possible_neighbors.append(tl)
-            elif self.xpos != hsize:
-                self.possible_neighbors.append(tr)
-        elif self.ypos != vsize:
-            self.possible_neighbors.append(b)
-            if self.xpos != 0:
-                self.possible_neighbors.append(bl)
-            elif self.xpos != hsize:
-                self.possible_neighbors.append(br)
+        if self.xpos == 0:
+            to_remove.append(tl)
+            to_remove.append(l)
+            to_remove.append(bl)
+        elif self.xpos == hsize-1:
+            to_remove.append(tr)
+            to_remove.append(r)
+            to_remove.append(br)
+
+        if self.ypos == 0:
+            to_remove.append(tl)
+            to_remove.append(t)
+            to_remove.append(tr)
+        elif self.ypos == vsize-1:
+            to_remove.append(bl)
+            to_remove.append(b)
+            to_remove.append(br)
+
+        to_remove = list(set(to_remove))
+
+        for item in to_remove:
+            possible_neighbors.remove(item)
 
         self.neighbors = list(set(possible_neighbors))
 
@@ -60,20 +67,30 @@ class Cell(object):
         return self.neighbors
 
 
-    def birth(self):
-        if self.status == 0:
-            if self.num_of_neighbors in self.numtobirth:
+    def check_birth(self):
+
+        for item in self.numtobirth:
+            if self.num_of_neighbors == item:
+                print 'born'
                 self.status = 1
+                break
+        print '\n'
 
 
-    def death(self):
-            if self.num_of_neighbors not in self.numtolive:
-                self.status = 0
+    def check_death(self):
+        
+        die = True
+        for item in self.numtolive:
+            if self.num_of_neighbors == item:
+                die = False
+        if die == True:
+            self.status = 0
 
 
     def reap_and_sow(self):
-        if self.status == 1: 
-            self.death()
-        else:
-            self.birth()
+
+        if self.status == 1:
+            self.check_death()
+        elif self.status == 0:
+            self.check_birth()
 

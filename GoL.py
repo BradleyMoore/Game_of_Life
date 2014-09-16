@@ -1,4 +1,5 @@
 from __future__ import print_function
+import random
 import os
 
 from config import HSIZE, VSIZE, NEIGHBORS_FOR_BIRTH, NEIGHBORS_FOR_LIFE
@@ -16,6 +17,9 @@ def let_there_be_life(hsize, vsize, birth_neighbors, life_neighbors):
 
 life = let_there_be_life(HSIZE, VSIZE, NEIGHBORS_FOR_BIRTH, NEIGHBORS_FOR_LIFE)
 
+for i in xrange(300):
+    cell = life[random.randint(0, HSIZE-1)][random.randint(0, VSIZE-1)]
+    cell.status = 1
 
 def find_life():
 
@@ -41,7 +45,6 @@ while __name__ == '__main__':
         x, y = location
         cell = life[x][y]
         neighbors.extend(cell.find_neighbors(HSIZE, VSIZE))
-        
 
     for location in set(neighbors):
         x, y = location
@@ -53,13 +56,12 @@ while __name__ == '__main__':
     for location in living_cells:
         x, y = location
         cell = life[x][y]
+        print(cell.status)
         cell.reap_and_sow()
+        print(cell.status)
+        print('\n')
         if cell.status == 1:
             next_round_life.append(cell.pos)
-
-    living_cells = []
-    living_cells = next_round_life
-    next_round_life = []
 
     for i in xrange(VSIZE):
         for j in xrange(HSIZE):
@@ -68,5 +70,11 @@ while __name__ == '__main__':
                 print(' ', end='')
             else:
                 print('O', end='')
-            print('\n')
-    os.system('clear')
+        print('\n')
+    for i in xrange(80):
+        print('O', end='')
+    #os.system('clear')
+
+    living_cells = []
+    living_cells = next_round_life
+    next_round_life = []
