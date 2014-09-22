@@ -35,9 +35,9 @@ class Pattern(object):
         pattern = patterns[self.name]
         coordinates = []
 
-        for y in len(pattern):
-            for x in len(pattern[y]):
-                if pattern[x][y] == 1:
-                    corrdinates.append((self.x+x, self.y+y))
+        for y in xrange(len(pattern)):
+            for x in xrange(len(pattern[y])):
+                if pattern[y][x] == 1:
+                    coordinates.append((self.x+x, self.y+y))
 
         return coordinates
