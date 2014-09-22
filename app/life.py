@@ -8,12 +8,12 @@ class Cell(object):
         self.y = pos[1]
 
 
-    def add_neighbors(self):
+    def list_neighbors(self):
         self.neighbor_list = []
 
-        for i in xrange(self.x-1, self.x+1):
-            for j in xrange(self.y-1, self.y+1):
-                self.neighbor_list.append((i,j))
+        for x in xrange(self.x-1, self.x+2):
+            for y in xrange(self.y-1, self.y+2):
+                self.neighbor_list.append((x,y))
 
         self.neighbor_list.remove(self.pos)
 
