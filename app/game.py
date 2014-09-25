@@ -8,14 +8,14 @@ TO_LIVE = [2, 3]
 TO_BE_BORN = [3]
 
 
-def actions():
-	life = []
+def actions(life):
+	new_life = []
 	neighbors = []
 
-	neighbors = get_neighbors()
-	life = create_life(neighbors)
+	neighbors = get_neighbors(life)
+	new_life = create_life(neighbors)
 
-	return life
+	return new_life
 
 
 def create_life(neighbors):
