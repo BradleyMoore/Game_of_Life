@@ -5,6 +5,7 @@ from time import sleep
 import pygame
 
 from app.game import draw_game, event_handler, game_actions, SCREEN
+from app.life import Pattern
 
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -13,7 +14,8 @@ pygame.init()
 clock = pygame.time.Clock()
 fps = 30
 
-life = Pattern('block', (0,0))
+init_life = Pattern('block', (0,0))
+life = init_life.create_pattern()
 
 while __name__ == '__main__':
     tickFPS = clock.tick(fps)
