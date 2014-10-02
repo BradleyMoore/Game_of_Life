@@ -1,11 +1,19 @@
+from game import SCREEN
+
+
 class Cell(object):
 
     def __init__(self, pos):
+        self.color = (255,255,255)
         self.neighbors = 0
         self.neighbor_list = []
         self.pos = pos
         self.x = pos[0]
         self.y = pos[1]
+
+
+    def draw(self):
+        pygame.draw.rect(SCREEN, self.color, (self.x*10, self.y*10, 10, 10))
 
 
     def list_neighbors(self):

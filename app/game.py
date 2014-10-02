@@ -3,6 +3,12 @@ import sys
 
 import pygame
 
+from life.Cell import draw
+
+
+WIDTH = 800
+HEIGHT = 600
+SCREEN = pygame.display.set_mode([WIDTH,HEIGHT])
 
 TO_LIVE = [2, 3]
 TO_BE_BORN = [3]
@@ -30,8 +36,9 @@ def create_life(neighbors):
 	return life
 
 
-def draw():
-    pass
+def draw_game(life):
+    for cell in life:
+    	cell.draw()
 
 
 def event_handler():
@@ -43,6 +50,13 @@ def event_handler():
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
+
+
+def game_actions(old_life):
+	neighbors = get_neighbors(old_life)
+	life = create_life(neighbors)
+
+	return life
 
 
 def get_neighbors(life):
