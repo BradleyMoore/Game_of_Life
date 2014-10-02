@@ -3,8 +3,6 @@ import sys
 
 import pygame
 
-from life.Cell import draw
-
 
 WIDTH = 800
 HEIGHT = 600
@@ -38,7 +36,7 @@ def create_life(neighbors):
 
 def draw_game(life):
     for cell in life:
-    	cell.draw()
+    	cell.draw(SCREEN)
 
 
 def event_handler():

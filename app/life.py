@@ -1,6 +1,3 @@
-from game import SCREEN
-
-
 class Cell(object):
 
     def __init__(self, pos):
@@ -12,7 +9,7 @@ class Cell(object):
         self.y = pos[1]
 
 
-    def draw(self):
+    def draw(self, SCREEN):
         pygame.draw.rect(SCREEN, self.color, (self.x*10, self.y*10, 10, 10))
 
 
