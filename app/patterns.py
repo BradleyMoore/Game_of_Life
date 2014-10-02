@@ -18,7 +18,7 @@ patterns['loaf'] = [
     [0,0,1,0]
 ]
 
-paterns['boat'] = [
+patterns['boat'] = [
     [1,1,0],
     [1,0,1],
     [0,1,0]
