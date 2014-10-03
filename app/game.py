@@ -19,10 +19,14 @@ def create_life(life, neighbors):
 	neighbor_dict = Counter(neighbors)
 	neighbor_list = neighbor_dict.items()
 
+	life_pos = []
+	for cell in life:
+		life_pos.append(cell.pos)
+
 	for pos, count in neighbor_list:
-		if count in TO_BE_BORN and pos not in life:
+		if count in TO_BE_BORN and pos not in life_pos:
 			new_life.append(pos)
-		if count in TO_LIVE and pos in life:
+		if count in TO_LIVE and pos in life_pos:
 			new_life.append(pos)
 
 	return new_life

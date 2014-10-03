@@ -12,11 +12,16 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
 
 clock = pygame.time.Clock()
-fps = 1
+fps = 10
 
 life = []
-init_life = Pattern('pulsar', (150,150))
+init_life = Pattern('pulsar', (20,20))
 coordinate_list = init_life.create_pattern()
+for coordinate in coordinate_list:
+    life.append(Cell(coordinate))
+
+extra_life = Pattern('glider',(1,1))
+coordinate_list = extra_life.create_pattern()
 for coordinate in coordinate_list:
     life.append(Cell(coordinate))
 
