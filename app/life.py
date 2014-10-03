@@ -1,7 +1,10 @@
+import pygame
+
+
 class Cell(object):
 
     def __init__(self, pos):
-        self.color = (255,255,255)
+        self.color = (255,0,0)
         self.neighbors = 0
         self.neighbor_list = []
         self.pos = pos

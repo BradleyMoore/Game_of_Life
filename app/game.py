@@ -3,6 +3,8 @@ import sys
 
 import pygame
 
+from life import Cell
+
 
 WIDTH = 800
 HEIGHT = 600
@@ -12,20 +14,10 @@ TO_LIVE = [2, 3]
 TO_BE_BORN = [3]
 
 
-def actions(life):
-	new_life = []
-	neighbors = []
-
-	neighbors = get_neighbors(life)
-	new_life = create_life(neighbors)
-
-	return new_life
-
-
 def create_life(neighbors):
 	life = []
 	neighbor_dict = Counter(neighbors)
-	neighbor_list = neighbordict.items()
+	neighbor_list = neighbor_dict.items()
 
 	for pos, count in neighbor_list:
 		if count in TO_LIVE or count in TO_BE_BORN:
@@ -51,8 +43,13 @@ def event_handler():
 
 
 def game_actions(old_life):
+	life = []
+
 	neighbors = get_neighbors(old_life)
-	life = create_life(neighbors)
+	new_life = create_life(neighbors)
+
+	for coordinate in new_life:
+	    life.append(Cell(coordinate))
 
 	return life
 
@@ -60,7 +57,7 @@ def game_actions(old_life):
 def get_neighbors(life):
 	neighbors = []
 
-	for cell in all_possible_neighbors:
+	for cell in life:
 		neighbors.extend(cell.list_neighbors())
 
 	return neighbors
