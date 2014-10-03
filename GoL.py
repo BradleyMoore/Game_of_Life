@@ -12,10 +12,10 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
 
 clock = pygame.time.Clock()
-fps = 30
+fps = 1
 
 life = []
-init_life = Pattern('block', (150,150))
+init_life = Pattern('pulsar', (150,150))
 coordinate_list = init_life.create_pattern()
 for coordinate in coordinate_list:
     life.append(Cell(coordinate))
@@ -23,7 +23,6 @@ for coordinate in coordinate_list:
 old_life = []
 
 while __name__ == '__main__':
-    print len(life)
     tickFPS = clock.tick(fps)
     pygame.display.set_caption("Press Esc to quit. FPS: %.2f" % (clock.get_fps()))
     SCREEN.fill((0,0,0))
