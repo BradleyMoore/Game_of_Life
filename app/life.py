@@ -13,7 +13,7 @@ class Cell(object):
 
 
     def draw(self, SCREEN):
-        pygame.draw.rect(SCREEN, self.color, (self.x*10, self.y*10, 10, 10))
+        pygame.draw.rect(SCREEN, self.color, (self.x, self.y, 10, 10))
 
 
     def list_neighbors(self):

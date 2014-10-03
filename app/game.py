@@ -14,16 +14,19 @@ TO_LIVE = [2, 3]
 TO_BE_BORN = [3]
 
 
-def create_life(neighbors):
-	life = []
+def create_life(life, neighbors):
+	new_life = []
 	neighbor_dict = Counter(neighbors)
 	neighbor_list = neighbor_dict.items()
-
+	print neighbor_list
+	print '\n'
 	for pos, count in neighbor_list:
-		if count in TO_LIVE or count in TO_BE_BORN:
-			life.append(pos)
+		if count in TO_BE_BORN and pos not in life:
+			new_life.append(pos)
+		if count in TO_LIVE and pos in life:
+			new_life.append(post)
 
-	return life
+	return new_life
 
 
 def draw_game(life):
@@ -46,7 +49,7 @@ def game_actions(old_life):
 	life = []
 
 	neighbors = get_neighbors(old_life)
-	new_life = create_life(neighbors)
+	new_life = create_life(neighbors, old_life)
 
 	for coordinate in new_life:
 	    life.append(Cell(coordinate))
