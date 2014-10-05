@@ -12,7 +12,7 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
 
 clock = pygame.time.Clock()
-fps = 30
+fps = 15
 
 life = []
 init_life = Pattern('pulsar', (40,30))
