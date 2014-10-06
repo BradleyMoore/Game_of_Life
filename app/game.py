@@ -6,13 +6,6 @@ import pygame
 from life import Cell
 
 
-pygame.display.init()
-modes = pygame.display.list_modes()
-
-WIDTH = modes[0][0]
-HEIGHT = modes[0][1]
-SCREEN = pygame.display.set_mode((WIDTH, HEIGHT),pygame.FULLSCREEN)
-
 TO_LIVE = [2, 3]
 TO_BE_BORN = [3]
 
@@ -35,9 +28,9 @@ def create_life(life, neighbors):
 	return new_life
 
 
-def draw_game(life):
+def draw_game(life, screen):
     for cell in life:
-    	cell.draw(SCREEN)
+    	cell.draw(screen)
 
 
 def event_handler():
