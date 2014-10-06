@@ -15,20 +15,11 @@ clock = pygame.time.Clock()
 fps = 15
 
 life = []
-init_life = Pattern('pulsar', (40,30))
+init_life = Pattern('single_layer_block-laying_switch_engine', (40,30))
 coordinate_list = init_life.create_pattern()
 for coordinate in coordinate_list:
     life.append(Cell(coordinate))
 
-extra_life = Pattern('glider',(1,11))
-coordinate_list = extra_life.create_pattern()
-for coordinate in coordinate_list:
-    life.append(Cell(coordinate))
-
-third_life = Pattern('lwss',(10,25))
-coordinate_list = third_life.create_pattern()
-for coordinate in coordinate_list:
-    life.append(Cell(coordinate))
 
 old_life = []
 
