@@ -20,7 +20,7 @@ clock = pygame.time.Clock()
 fps = 15
 
 life = []
-init_life = Pattern('single_layer_block-laying_switch_engine', (40,30))
+init_life = Pattern('r-pentomino', (60,40))
 coordinate_list = init_life.create_pattern()
 for coordinate in coordinate_list:
     life.append(Cell(coordinate))
