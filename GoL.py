@@ -10,6 +10,7 @@ from app.life import Cell, Pattern
 
 pygame.init()
 pygame.display.init()
+
 modes = pygame.display.list_modes()
 
 WIDTH = modes[0][0]
@@ -33,7 +34,7 @@ while __name__ == '__main__':
     pygame.display.set_caption("Press Esc to quit. FPS: %.2f" % (clock.get_fps()))
     SCREEN.fill((0,0,0))
     event_handler()
-    draw_game(life, SCREEN)
+    draw_game(life, SCREEN, HEIGHT, WIDTH)
     old_life = life
     life = game_actions(old_life)
     pygame.display.flip()

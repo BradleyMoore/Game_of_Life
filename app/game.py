@@ -28,9 +28,9 @@ def create_life(life, neighbors):
 	return new_life
 
 
-def draw_game(life, screen):
+def draw_game(life, screen, height, width):
     for cell in life:
-    	cell.draw(screen)
+    	cell.draw(screen, height, width)
 
 
 def event_handler():
