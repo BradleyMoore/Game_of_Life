@@ -12,8 +12,13 @@ class Cell(object):
         self.y = pos[1]
 
 
-    def draw(self, SCREEN):
-        pygame.draw.rect(SCREEN, self.color, (self.x*10, self.y*10, 10, 10))
+    def draw(self, screen, height, width):
+        if self.x < 0 or self.x > width:
+            pass
+        elif self.y < 0 or self.y > height:
+            pass
+        else:
+            pygame.draw.rect(screen, self.color, (self.x*10, self.y*10, 10, 10))
 
 
     def list_neighbors(self):
