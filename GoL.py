@@ -4,7 +4,7 @@ from time import sleep
 
 import pygame
 
-from app.game import draw_game, event_handler, game_actions
+from app.game import draw_game, game_event_handler, game_actions, draw_title_screen
 from app.life import Cell, Pattern
 
 
@@ -32,9 +32,8 @@ old_life = []
 while __name__ == '__main__':
     tickFPS = clock.tick(fps)
     pygame.display.set_caption("Press Esc to quit. FPS: %.2f" % (clock.get_fps()))
-    SCREEN.fill((0,0,0))
-    event_handler()
-    draw_game(life, SCREEN, HEIGHT, WIDTH)
+    game_event_handler()
+    draw_title_screen(SCREEN, HEIGHT, WIDTH)
     old_life = life
     life = game_actions(old_life)
     pygame.display.flip()

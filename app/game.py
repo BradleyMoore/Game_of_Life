@@ -29,11 +29,31 @@ def create_life(life, neighbors):
 
 
 def draw_game(life, screen, height, width):
-    for cell in life:
-    	cell.draw(screen, height, width)
+	screen.fill((0,0,0))
+	for cell in life:
+		cell.draw(screen, height, width)
 
 
-def event_handler():
+def draw_title_screen(screen, height, width):
+	screen.fill((50,50,200))
+	pygame.draw.rect(screen, (0,0,0,0,), (0,0,width,height), height/9)
+	pygame.draw.rect(screen, (200,50,50), (0,0,width,height), height/10)
+	
+	myfont = pygame.font.SysFont('monospace', 200)
+	label = myfont.render("Conway's", 1, (255,255,0))
+	screen.blit(label, (200, 50))
+	label = myfont.render('Game of', 1, (255,255,0))
+	screen.blit(label, (250, 250))
+	label = myfont.render('LIFE', 1, (255,255,0))
+	screen.blit(label, (300, 450))
+
+	pygame.draw.rect(screen, (255,0,255), (900,550,100,50))
+	myfont = pygame.font.SysFont('monospace', 20)
+	label = myfont.render('START', 1, (255,255,0))
+	screen.blit(label, (920, 560))
+
+
+def game_event_handler():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
