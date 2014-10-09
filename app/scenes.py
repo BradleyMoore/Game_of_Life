@@ -1,6 +1,6 @@
 import pygame
 
-from constants import HEIGHT, WIDTH, SCREEN
+from constants import BOX, HEIGHT, WIDTH, SCREEN
 from interactive import Button
 
 
@@ -60,10 +60,10 @@ class GameScene(Scene):
     def __init__(self, background):
         Scene.__init__(self, background)
 
-        for i in xrange(WIDTH/150, WIDTH, WIDTH/150):
-            self.lines.append({'color': (100,100,100), 'startx': i, 'starty': 0, 'endx': i, 'endy': HEIGHT, 'width': 2})
-        for i in xrange(WIDTH/150, HEIGHT, WIDTH/150):
-            self.lines.append({'color': (100,100,100), 'startx': 0, 'starty': i, 'endx': WIDTH, 'endy': i, 'width': 2})
+        for i in xrange(0, WIDTH, BOX):
+            self.lines.append({'color': (100,100,100), 'startx': i, 'starty': 0, 'endx': i, 'endy': HEIGHT, 'width': 1})
+        for i in xrange(0, HEIGHT, BOX):
+            self.lines.append({'color': (100,100,100), 'startx': 0, 'starty': i, 'endx': WIDTH, 'endy': i, 'width': 1})
 
         # start button
         self.buttons['start'] = (Button('start', (WIDTH*.65,HEIGHT*.67),

@@ -1,42 +1,22 @@
+import sys
+
 import pygame
 
 from interactive import Button
 from life import Cell, create_life, get_neighbors
-from scenes import TitleScene
-
-
-pygame.init()
-pygame.display.init()
-
-modes = pygame.display.list_modes()
-
-WIDTH = modes[0][0]
-HEIGHT = modes[0][1]
-SCREEN = pygame.display.set_mode((WIDTH, HEIGHT),pygame.FULLSCREEN)
+from scenes import GameScene, TitleScene
+from constants import HEIGHT, WIDTH, SCREEN
 
 # game rules
 TO_LIVE = [2, 3]
 TO_BE_BORN = [3]
 
-title = TitleScene(HEIGHT, WIDTH, (50,50,200))
+title = TitleScene((50,50,200))
+game = GameScene((150,150,150))
 
 states = {}
-states['title'] = title.draw(SCREEN)
-
-
-def draw_game(life, screen, height, width):
-    # draw game board
-    screen.fill((0,0,0))
-
-    # draw pause button
-    pygame.draw.rect(screen, (255,0,255), (900,550,100,50))
-    myfont = pygame.font.SysFont('monospace', 20)
-    label = myfont.render('PAUSE', 1, (255,255,0))
-    screen.blit(label, (920, 560))
-
-    # draw cells
-    for cell in life:
-        cell.draw(screen, height, width)
+states['title'] = title.draw()
+states['game'] = game.draw()
 
 
 def draw_pause(screen, height, width):
@@ -47,7 +27,6 @@ def draw_pause(screen, height, width):
 
 
 def event_handler(state):
-    from game import SCREEN
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()

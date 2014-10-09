@@ -1,7 +1,8 @@
 from collections import Counter
-import sys
 
 import pygame
+
+from constants import BOX, HEIGHT, WIDTH, SCREEN
 
 
 class Cell(object):
@@ -15,13 +16,13 @@ class Cell(object):
         self.y = pos[1]
 
 
-    def draw(self, screen, height, width):
-        if self.x < 0 or self.x > width:
+    def draw(self):
+        if self.x < 0 or self.x > WIDTH:
             pass
-        elif self.y < 0 or self.y > height:
+        elif self.y < 0 or self.y > HEIGHT:
             pass
         else:
-            pygame.draw.rect(screen, self.color, (self.x*10, self.y*10, 10, 10))
+            pygame.draw.rect(SCREEN, self.color, (self.x*BOX, self.y*BOX, BOX, BOX))
 
 
     def list_neighbors(self):
