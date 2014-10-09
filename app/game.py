@@ -53,7 +53,7 @@ def draw_title_screen(screen, height, width):
 	screen.blit(label, (920, 560))
 
 
-def game_event_handler():
+def game_event_handler(state):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -62,11 +62,23 @@ def game_event_handler():
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
-        elif event.type == pygame.MOUSEBUTTONUP:
-            pos = pygame.mouse.get_pos()
-            if pos[0] > 900 and pos[0] < 1000:
-                if pos[1] > 550 and pos[1] < 600:
-                    return 'game'
+        elif state == 'title':
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                if pos[0] > 900 and pos[0] < 1000:
+                    if pos[1] > 550 and pos[1] < 600:
+                        return 'game'
+            return 'title'
+        elif state == 'game':
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                if pos[0] > 900 and pos[0] < 1000:
+                    if pos[1] > 550 and pos[1] < 600:
+                        return 'game'
+        elif state == 'pause':
+            return 'pause'
+
+    return state
 
 
 def game_actions(old_life):
