@@ -4,8 +4,9 @@ from time import sleep
 
 import pygame
 
-from app.game import draw_game, event_handler, game_actions, draw_pause, draw_title_screen
+from app.game import draw_game, event_handler, game_actions, draw_pause
 from app.life import Cell, Pattern
+from app.scenes import TitleScene
 
 
 pygame.init()
@@ -30,12 +31,14 @@ for coordinate in coordinate_list:
 old_life = []
 state = 'title'
 
+title = TitleScene(HEIGHT, WIDTH, (50,50,200))
+
 while __name__ == '__main__':
     tickFPS = clock.tick(fps)
     pygame.display.set_caption("Press Esc to quit. FPS: %.2f" % (clock.get_fps()))
     state = event_handler(state)
     if state == 'title':
-        draw_title_screen(SCREEN, HEIGHT, WIDTH)
+        title.draw(SCREEN)
     elif state == 'game':
         draw_game(life, SCREEN, HEIGHT, WIDTH)
         old_life = life
