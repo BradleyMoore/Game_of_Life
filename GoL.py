@@ -28,12 +28,18 @@ for coordinate in coordinate_list:
 
 
 old_life = []
+loop = 'title'
 
 while __name__ == '__main__':
     tickFPS = clock.tick(fps)
     pygame.display.set_caption("Press Esc to quit. FPS: %.2f" % (clock.get_fps()))
-    game_event_handler()
-    draw_title_screen(SCREEN, HEIGHT, WIDTH)
-    old_life = life
-    life = game_actions(old_life)
+    next_loop = game_event_handler()
+    if next_loop != None:
+        loop = next_loop
+    if loop == 'title':
+        draw_title_screen(SCREEN, HEIGHT, WIDTH)
+    elif loop == 'game':
+        draw_game(life, SCREEN, HEIGHT, WIDTH)
+        old_life = life
+        life = game_actions(old_life)
     pygame.display.flip()

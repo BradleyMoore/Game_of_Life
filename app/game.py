@@ -38,7 +38,7 @@ def draw_title_screen(screen, height, width):
 	screen.fill((50,50,200))
 	pygame.draw.rect(screen, (0,0,0,0,), (0,0,width,height), height/9)
 	pygame.draw.rect(screen, (200,50,50), (0,0,width,height), height/10)
-	
+
 	myfont = pygame.font.SysFont('monospace', 200)
 	label = myfont.render("Conway's", 1, (255,255,0))
 	screen.blit(label, (200, 50))
@@ -62,6 +62,11 @@ def game_event_handler():
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
+        elif event.type == pygame.MOUSEBUTTONUP:
+            pos = pygame.mouse.get_pos()
+            if pos[0] > 900 and pos[0] < 1000:
+                if pos[1] > 550 and pos[1] < 600:
+                    return 'game'
 
 
 def game_actions(old_life):
