@@ -54,28 +54,6 @@ def draw_pause(screen, height, width):
     screen.blit(label, (920, 560))
 
 
-def draw_title_screen(screen, height, width):
-    # draw title screen and background
-	screen.fill((50,50,200))
-	pygame.draw.rect(screen, (0,0,0,0,), (0,0,width,height), height/9)
-	pygame.draw.rect(screen, (200,50,50), (0,0,width,height), height/10)
-
-    # draw title
-	myfont = pygame.font.SysFont('monospace', 200)
-	label = myfont.render("Conway's", 1, (255,255,0))
-	screen.blit(label, (200, 50))
-	label = myfont.render('Game of', 1, (255,255,0))
-	screen.blit(label, (250, 250))
-	label = myfont.render('LIFE', 1, (255,255,0))
-	screen.blit(label, (300, 450))
-
-    # draw start button
-	pygame.draw.rect(screen, (255,0,255), (900,550,100,50))
-	myfont = pygame.font.SysFont('monospace', 20)
-	label = myfont.render('START', 1, (255,255,0))
-	screen.blit(label, (920, 560))
-
-
 def event_handler(state):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
