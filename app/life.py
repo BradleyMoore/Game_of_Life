@@ -1,3 +1,6 @@
+from collections import Counter
+import sys
+
 import pygame
 
 
@@ -54,3 +57,34 @@ class Pattern(object):
                     coordinates.append((self.x+x, self.y+y))
 
         return coordinates
+
+
+def create_life(life, neighbors):
+    from game import TO_BE_BORN, TO_LIVE
+    new_life = []
+    # turn neighbor positions into a list of tuples
+    neighbor_dict = Counter(neighbors)
+    neighbor_list = neighbor_dict.items()
+
+    life_pos = []
+    for cell in life:
+        life_pos.append(cell.pos)
+
+    for pos, count in neighbor_list:
+        # give birth to cells
+        if count in TO_BE_BORN and pos not in life_pos:
+            new_life.append(pos)
+        # cells staying alive
+        if count in TO_LIVE and pos in life_pos:
+            new_life.append(pos)
+
+    return new_life
+
+
+def get_neighbors(life):
+    neighbors = []
+
+    for cell in life:
+        neighbors.extend(cell.list_neighbors())
+
+    return neighbors

@@ -4,19 +4,10 @@ from time import sleep
 
 import pygame
 
-from app.game import draw_game, event_handler, game_actions, draw_pause
+from app.game import draw_game, event_handler, game_actions, draw_pause, HEIGHT, WIDTH, SCREEN
 from app.life import Cell, Pattern
 from app.scenes import TitleScene
 
-
-pygame.init()
-pygame.display.init()
-
-modes = pygame.display.list_modes()
-
-WIDTH = modes[0][0]
-HEIGHT = modes[0][1]
-SCREEN = pygame.display.set_mode((WIDTH, HEIGHT),pygame.FULLSCREEN)
 
 clock = pygame.time.Clock()
 fps = 15
@@ -29,9 +20,7 @@ for coordinate in coordinate_list:
 
 
 old_life = []
-state = 'title'
-
-title = TitleScene(HEIGHT, WIDTH, (50,50,200))
+state = 'game'
 
 while __name__ == '__main__':
     tickFPS = clock.tick(fps)

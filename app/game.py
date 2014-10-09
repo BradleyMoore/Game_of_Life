@@ -1,35 +1,27 @@
-from collections import Counter
-import sys
-
 import pygame
 
 from interactive import Button
-from life import Cell
+from life import Cell, create_life, get_neighbors
+from scenes import TitleScene
+
+
+pygame.init()
+pygame.display.init()
+
+modes = pygame.display.list_modes()
+
+WIDTH = modes[0][0]
+HEIGHT = modes[0][1]
+SCREEN = pygame.display.set_mode((WIDTH, HEIGHT),pygame.FULLSCREEN)
 
 # game rules
 TO_LIVE = [2, 3]
 TO_BE_BORN = [3]
 
+title = TitleScene(HEIGHT, WIDTH, (50,50,200))
 
-def create_life(life, neighbors):
-	new_life = []
-    # turn neighbor positions into a list of tuples
-	neighbor_dict = Counter(neighbors)
-	neighbor_list = neighbor_dict.items()
-
-	life_pos = []
-	for cell in life:
-		life_pos.append(cell.pos)
-
-	for pos, count in neighbor_list:
-        # give birth to cells
-		if count in TO_BE_BORN and pos not in life_pos:
-			new_life.append(pos)
-        # cells staying alive
-		if count in TO_LIVE and pos in life_pos:
-			new_life.append(pos)
-
-	return new_life
+states = {}
+states['title'] = title.draw(SCREEN)
 
 
 def draw_game(life, screen, height, width):
@@ -55,6 +47,7 @@ def draw_pause(screen, height, width):
 
 
 def event_handler(state):
+    from game import SCREEN
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -65,6 +58,11 @@ def event_handler(state):
                 sys.exit()
 
         elif state == 'title':
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                pressed = title.buttons['start'].check_mouse_pos(pos)
+                if pressed == True:
+                    title.buttons['start'].draw_down(SCREEN)
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
                 # check if start is clicked
@@ -101,12 +99,3 @@ def game_actions(old_life):
 	    life.append(Cell(coordinate))
 
 	return life
-
-
-def get_neighbors(life):
-	neighbors = []
-
-	for cell in life:
-		neighbors.extend(cell.list_neighbors())
-
-	return neighbors
