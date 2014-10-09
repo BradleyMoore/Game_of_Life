@@ -4,7 +4,7 @@ from time import sleep
 
 import pygame
 
-from app.game import draw_game, game_event_handler, game_actions, draw_title_screen
+from app.game import draw_game, event_handler, game_actions, draw_pause, draw_title_screen
 from app.life import Cell, Pattern
 
 
@@ -33,7 +33,7 @@ state = 'title'
 while __name__ == '__main__':
     tickFPS = clock.tick(fps)
     pygame.display.set_caption("Press Esc to quit. FPS: %.2f" % (clock.get_fps()))
-    state = game_event_handler(state)
+    state = event_handler(state)
     if state == 'title':
         draw_title_screen(SCREEN, HEIGHT, WIDTH)
     elif state == 'game':
@@ -41,5 +41,5 @@ while __name__ == '__main__':
         old_life = life
         life = game_actions(old_life)
     elif state == 'pause':
-        pass
+        draw_pause(SCREEN, HEIGHT, WIDTH)
     pygame.display.flip()
