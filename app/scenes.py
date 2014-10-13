@@ -66,12 +66,12 @@ class GameScene(Scene):
             self.lines.append({'color': (100,100,100), 'startx': 0, 'starty': i, 'endx': WIDTH, 'endy': i, 'width': 1})
 
         # start button
-        self.buttons['pause'] = (Button('pause', (WIDTH*.75,HEIGHT*.75),
+        self.buttons['pause'] = (Button('pause', (WIDTH*.801,HEIGHT*.75),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 'PAUSE', (100,100,100,), 28,
-                                (WIDTH*.752, HEIGHT*.765)))
+                                (WIDTH*.803, HEIGHT*.765)))
 
-        self.buttons['play'] = (Button('play', (WIDTH*.825,HEIGHT*.75),
+        self.buttons['play'] = (Button('play', (WIDTH*.876,HEIGHT*.75),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 'PLAY', (100,100,100,), 28,
-                                (WIDTH*.833, HEIGHT*.765)))
+                                (WIDTH*.884, HEIGHT*.765)))
