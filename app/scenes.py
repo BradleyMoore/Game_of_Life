@@ -87,7 +87,34 @@ class GameScene(Scene):
         for i in xrange(0, HEIGHT, BOX):
             self.lines.append({'color': (100,100,100), 'startx': 0, 'starty': i, 'endx': WIDTH, 'endy': i, 'width': 1})
 
-        # start button
+        # zoom controls
+        self.buttons['out'] = Button('out', (WIDTH*.801,HEIGHT*.6),
+                                WIDTH*.07, HEIGHT*.07, (200,200,200),
+                                '-', (100,100,100,), 50,
+                                (WIDTH*.823, HEIGHT*.6), 'game')
+
+        self.buttons['in'] =  Button('in', (WIDTH*.876,HEIGHT*.6),
+                                WIDTH*.07, HEIGHT*.07, (200,200,200),
+                                '+', (100,100,100,), 50,
+                                (WIDTH*.898, HEIGHT*.598), 'game')
+
+        # speed controls
+        self.buttons['slow'] =  Button('slow', (WIDTH*.801,HEIGHT*.675),
+                                WIDTH*.04, WIDTH*.04, (200,200,200),
+                                '<<', (100,100,100,), 28,
+                                (WIDTH*.806,HEIGHT*.685), 'game')
+
+        self.buttons['normal'] =  Button('normal', (WIDTH*.856,HEIGHT*.675),
+                                WIDTH*.04, WIDTH*.04, (200,200,200),
+                                '>', (100,100,100,), 28,
+                                (WIDTH*.869,HEIGHT*.685), 'game')
+
+        self.buttons['fast'] =  Button('fast', (WIDTH*.906,HEIGHT*.675),
+                                WIDTH*.04, WIDTH*.04, (200,200,200),
+                                '>>', (100,100,100,), 28,
+                                (WIDTH*.915,HEIGHT*.685), 'game')
+
+        # movement controls
         self.buttons['pause'] = Button('pause', (WIDTH*.801,HEIGHT*.75),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 'PAUSE', (100,100,100,), 28,
@@ -96,4 +123,12 @@ class GameScene(Scene):
         self.buttons['play'] =  Button('play', (WIDTH*.876,HEIGHT*.75),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 'PLAY', (100,100,100,), 28,
-                                (WIDTH*.884, HEIGHT*.765), 'play')
+                                (WIDTH*.884, HEIGHT*.765), 'game')
+
+        # exit
+        self.buttons['exit'] =  Button('exit', (WIDTH*.801,HEIGHT*.825),
+                                WIDTH*.1445, HEIGHT*.07, (200,200,200),
+                                'QUIT', (100,100,100,), 28,
+                                (WIDTH*.8475, HEIGHT*.839), 'exit')
+
+

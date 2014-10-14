@@ -5,7 +5,7 @@ from time import sleep
 import pygame
 
 from app.constants import HEIGHT, WIDTH, SCREEN
-from app.game import event_handler, game_actions, draw_pause, title, game
+from app.game import event_handler, game_actions, game, pause, title
 from app.life import Cell, Pattern
 
 
@@ -32,5 +32,8 @@ while __name__ == '__main__':
         old_life = life
         life = game_actions(old_life)
     elif state == 'pause':
-        draw_pause(SCREEN, HEIGHT, WIDTH)
+        pause.draw(life=life)
+    elif state == 'exit':
+        pygame.quit()
+        sys.exit()
     pygame.display.flip()

@@ -13,17 +13,14 @@ TO_BE_BORN = [3]
 
 title = TitleScene((50,50,200))
 game = GameScene((150,150,150))
+pause = GameScene((150,150,150))
+exit = GameScene((150,150,150))
 
 states = {}
 states['title'] = title
 states['game'] = game
-
-
-def draw_pause(screen, height, width):
-    pygame.draw.rect(screen, (255,0,255), (900,550,100,50))
-    myfont = pygame.font.SysFont('monospace', 20)
-    label = myfont.render('RESUME', 1, (255,255,0))
-    screen.blit(label, (920, 560))
+states['pause'] = pause
+states['exit'] = exit
 
 
 def event_handler(state):

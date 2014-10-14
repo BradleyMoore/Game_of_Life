@@ -2,7 +2,7 @@ import pygame
 
 
 class Button(object):
-    def __init__(self, name, pos, width, height, color, text, text_color, text_size, text_pos, next_game_state):
+    def __init__(self, name, pos, width, height, color, text, text_color, text_size, text_pos, next_game_state, **kwargs):
         from game import SCREEN
         self.name = name
         self.x = pos[0]
@@ -16,6 +16,7 @@ class Button(object):
         self.text_pos = text_pos
         self.state = 'up'
         self.next_game_state = next_game_state
+
 
     def check_mouse_pos(self, pos):
         if pos[0] >= self.x and pos[0] <= self.x + self.width:
