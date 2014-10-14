@@ -23,6 +23,7 @@ class Cell(object):
             pass
         else:
             pygame.draw.rect(SCREEN, self.color, (self.x*BOX, self.y*BOX, BOX, BOX))
+            print self.x*BOX, self.y*BOX
 
 
     def list_neighbors(self):
@@ -68,8 +69,9 @@ def create_life(life, neighbors):
     neighbor_list = neighbor_dict.items()
 
     life_pos = []
-    for cell in life:
-        life_pos.append(cell.pos)
+    if life != None:
+        for cell in life:
+            life_pos.append(cell.pos)
 
     for pos, count in neighbor_list:
         # give birth to cells
@@ -85,7 +87,8 @@ def create_life(life, neighbors):
 def get_neighbors(life):
     neighbors = []
 
-    for cell in life:
-        neighbors.extend(cell.list_neighbors())
+    if life != None:
+        for cell in life:
+            neighbors.extend(cell.list_neighbors())
 
     return neighbors

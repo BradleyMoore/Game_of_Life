@@ -2,6 +2,7 @@ import pygame
 
 from constants import BOX, HEIGHT, WIDTH, SCREEN
 from interactive import Button
+from patterns import patterns
 
 
 class Scene(object):
@@ -38,8 +39,9 @@ class Scene(object):
         SCREEN.fill(self.background)
 
         if 'life' in kwargs:
-            for cell in kwargs['life']:
-                cell.draw()
+            if kwargs['life'] != None:
+                for cell in kwargs['life']:
+                    cell.draw()
 
         for rect in self.rects:
             pygame.draw.rect(SCREEN, rect['color'], (rect['x'],rect['y'],rect['WIDTH'],rect['HEIGHT']), rect['stroke'])
@@ -132,3 +134,12 @@ class GameScene(Scene):
                                 WIDTH*.1445, HEIGHT*.07, (200,200,200),
                                 'QUIT', (100,100,100,), 28,
                                 (WIDTH*.8475, HEIGHT*.839), 'exit')
+
+        # patterns
+        i = 0
+        for name in patterns.keys():
+            i = i + HEIGHT*.04
+            self.buttons[name] = Button(name, (WIDTH*.801, HEIGHT*.0012*i),
+                                WIDTH*.1445, HEIGHT*.035, (200,200,200),
+                                name, (100,100,100), 8,
+                                (WIDTH*.805, HEIGHT*.0012*i+7), 'game', action=name)

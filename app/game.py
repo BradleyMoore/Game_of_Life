@@ -3,11 +3,13 @@ import sys
 import pygame
 
 from constants import BOX, HEIGHT, WIDTH, SCREEN, TO_BE_BORN, TO_LIVE
+from life import Pattern
 
 
 class Game(object):
     def __init__(self):
         self.fps = 11
+        self.new_pattern = ''
 
 
     def do_action(self, action):
@@ -17,10 +19,26 @@ class Game(object):
             self.set_normal_speed()
         elif action == 'speed_up':
             self.change_game_speed(1.11)
-        elif action == 'zoom_out':
-            self.box = self.box*.9
-        elif action == 'zoom_in':
-            self.box = self.box*1.11
+            '''
+            elif action == 'zoom_out':
+                self.box = self.box*.9
+            elif action == 'zoom_in':
+                self.box = self.box*1.11
+            '''
+        else:
+            new_life = []
+
+            pattern = Pattern(action, (90,60))
+            coordinate_list = pattern.create_pattern()
+
+            for coordinate in coordinate_list:
+                new_life.append(Cell(coordinate))
+
+            self.send_to_game(new_life)
+
+
+    def send_to_game(self, new_life):
+        self.new_pattern = new_life
 
 
     def change_game_speed(self, change):
