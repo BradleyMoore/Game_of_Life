@@ -2,7 +2,7 @@ import pygame
 
 
 class Button(object):
-    def __init__(self, name, pos, width, height, color, text, text_color, text_size, text_pos):
+    def __init__(self, name, pos, width, height, color, text, text_color, text_size, text_pos, next_game_state):
         from game import SCREEN
         self.name = name
         self.x = pos[0]
@@ -14,11 +14,28 @@ class Button(object):
         self.text_color = text_color
         self.text_size = text_size
         self.text_pos = text_pos
+        self.state = 'up'
+        self.next_game_state = next_game_state
 
-    def check_mouse_pos(pos):
-        if pos[0] >= self.pos[0] and pos[0] <= self.pos[0] + self.width:
-            if pos[1] >= self.pos[1] and pos[1] <= self.pos[1] + self.height:
-                return true
+    def check_mouse_pos(self, pos):
+        if pos[0] >= self.x and pos[0] <= self.x + self.width:
+            if pos[1] >= self.y and pos[1] <= self.y + self.height:
+                return True
+        return False
+
+
+    def change_button_state(self, pressed, new_state):
+        if pressed == True:
+            self.state = new_state
+            return self.name
+        return None
+
+
+    def draw(self, screen):
+        if self.state == 'up':
+            self.draw_up(screen)
+        else:
+            self.draw_down(screen)
 
 
     def draw_up(self, screen):
@@ -54,4 +71,7 @@ class Button(object):
         # button text
         myfont = pygame.font.SysFont('lucidaconsole', self.text_size)
         label = myfont.render(self.text, 1, self.text_color)
-        screen.blit(label, self.text_pos)
+        new_text_pos = (self.text_pos[0]+3, self.text_pos[1]+3)
+        screen.blit(label, new_text_pos)
+
+

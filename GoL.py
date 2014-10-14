@@ -19,7 +19,7 @@ for coordinate in coordinate_list:
     life.append(Cell(coordinate))
 
 old_life = []
-state = 'game'
+state = 'title'
 
 while __name__ == '__main__':
     tickFPS = clock.tick(fps)

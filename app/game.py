@@ -15,8 +15,8 @@ title = TitleScene((50,50,200))
 game = GameScene((150,150,150))
 
 states = {}
-states['title'] = title.draw()
-states['game'] = game.draw()
+states['title'] = title
+states['game'] = game
 
 
 def draw_pause(screen, height, width):
@@ -36,36 +36,27 @@ def event_handler(state):
                 pygame.quit()
                 sys.exit()
 
-        elif state == 'title':
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                pressed = title.buttons['start'].check_mouse_pos(pos)
-                if pressed == True:
-                    title.buttons['start'].draw_down(SCREEN)
-            if event.type == pygame.MOUSEBUTTONUP:
-                pos = pygame.mouse.get_pos()
-                # check if start is clicked
-                if pos[0] > 900 and pos[0] < 1000:
-                    if pos[1] > 550 and pos[1] < 600:
-                        return 'game'
-
-        elif state == 'game':
-            if event.type == pygame.MOUSEBUTTONUP:
-                pos = pygame.mouse.get_pos()
-                if pos[0] > 900 and pos[0] < 1000:
-                    if pos[1] > 550 and pos[1] < 600:
-                        return 'pause'
-
-        elif state == 'pause':
-            if event.type == pygame.MOUSEBUTTONUP:
-                pos = pygame.mouse.get_pos()
-                if pos[0] > 900 and pos[0] < 1000:
-                    if pos[1] > 550 and pos[1] < 600:
-                        return 'game'
-
-            return 'pause'
+        elif event.type == pygame.MOUSEBUTTONUP or event.type == pygame.MOUSEBUTTONDOWN:
+            next_game_state = click_buttons(event, state)
+            if next_game_state != None:
+                return next_game_state
 
     return state
+
+
+def click_buttons(event, state):
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        pos = pygame.mouse.get_pos()
+        name = states[state].check_buttons(pos, 'down')
+        if name != None:
+            states[state].buttons[name].state = 'down'
+
+    elif event.type == pygame.MOUSEBUTTONUP:
+        states[state].set_buttons_up()
+        pos = pygame.mouse.get_pos()
+        name = states[state].check_buttons(pos, 'up')
+        if name != None:
+            return states[state].buttons[name].next_game_state
 
 
 def game_actions(old_life):

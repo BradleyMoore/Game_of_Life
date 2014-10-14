@@ -12,6 +12,28 @@ class Scene(object):
         self.lines = []
         self.buttons = {}
 
+
+    def check_buttons(self, pos, new_state):
+        keys = self.buttons.keys()
+
+        for key in keys:
+            button = self.buttons[key]
+            pressed = button.check_mouse_pos(pos)
+            name = button.change_button_state(pressed, new_state)
+            if name != None:
+                return name
+
+        return None
+
+
+    def set_buttons_up(self):
+        keys = self.buttons.keys()
+
+        for key in keys:
+            button = self.buttons[key]
+            button.state = 'up'
+
+
     def draw(self, **kwargs):
         SCREEN.fill(self.background)
 
@@ -31,7 +53,7 @@ class Scene(object):
 
         button_list = self.buttons.keys()
         for button in button_list:
-            self.buttons[button].draw_up(SCREEN)
+            self.buttons[button].draw(SCREEN)
 
 
 class TitleScene(Scene):
@@ -39,10 +61,10 @@ class TitleScene(Scene):
         Scene.__init__(self, background)
 
         # start button
-        self.buttons['start'] = (Button('start', (WIDTH*.65,HEIGHT*.67),
+        self.buttons['start'] = Button('start', (WIDTH*.65,HEIGHT*.67),
                                 WIDTH*.1, HEIGHT*.1, (200,200,200),
                                 'START', (100,100,100,), 40,
-                                (WIDTH*.655, HEIGHT*.69)))
+                                (WIDTH*.655, HEIGHT*.69), 'game')
 
         # black matte
         self.rects.append({'color': (0,0,0), 'x': 0, 'y': 0, 'WIDTH': WIDTH, 'HEIGHT': HEIGHT, 'stroke': HEIGHT/9})
@@ -66,12 +88,12 @@ class GameScene(Scene):
             self.lines.append({'color': (100,100,100), 'startx': 0, 'starty': i, 'endx': WIDTH, 'endy': i, 'width': 1})
 
         # start button
-        self.buttons['pause'] = (Button('pause', (WIDTH*.801,HEIGHT*.75),
+        self.buttons['pause'] = Button('pause', (WIDTH*.801,HEIGHT*.75),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 'PAUSE', (100,100,100,), 28,
-                                (WIDTH*.803, HEIGHT*.765)))
+                                (WIDTH*.803, HEIGHT*.765), 'pause')
 
-        self.buttons['play'] = (Button('play', (WIDTH*.876,HEIGHT*.75),
+        self.buttons['play'] =  Button('play', (WIDTH*.876,HEIGHT*.75),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 'PLAY', (100,100,100,), 28,
-                                (WIDTH*.884, HEIGHT*.765)))
+                                (WIDTH*.884, HEIGHT*.765), 'play')
