@@ -1,9 +1,10 @@
 import pygame
 
+from game import change_game_speed, set_normal_speed
+
 
 class Button(object):
-    def __init__(self, name, pos, width, height, color, text, text_color, text_size, text_pos, next_game_state, **kwargs):
-        from game import SCREEN
+    def __init__(self, name, pos, width, height, color, text, text_color, text_size, text_pos, next_game_state, action=None):
         self.name = name
         self.x = pos[0]
         self.y = pos[1]
@@ -16,7 +17,14 @@ class Button(object):
         self.text_pos = text_pos
         self.state = 'up'
         self.next_game_state = next_game_state
-
+        self.action = action
+        self.actions = {
+                        'zoom_out': '',
+                        'zoom_in': '',
+                        'slow_down': change_game_speed(-5),
+                        'normal_speed': set_normal_speed(),
+                        'speed_up': change_game_speed(5)
+                       }
 
     def check_mouse_pos(self, pos):
         if pos[0] >= self.x and pos[0] <= self.x + self.width:
@@ -28,8 +36,14 @@ class Button(object):
     def change_button_state(self, pressed, new_state):
         if pressed == True:
             self.state = new_state
+            if self.state == 'up':
+                do_action()
             return self.name
         return None
+
+
+    def do_action():
+        self.actions[self.action]
 
 
     def draw(self, screen):
@@ -74,5 +88,3 @@ class Button(object):
         label = myfont.render(self.text, 1, self.text_color)
         new_text_pos = (self.text_pos[0]+3, self.text_pos[1]+3)
         screen.blit(label, new_text_pos)
-
-

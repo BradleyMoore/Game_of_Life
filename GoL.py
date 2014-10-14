@@ -5,12 +5,12 @@ from time import sleep
 import pygame
 
 from app.constants import HEIGHT, WIDTH, SCREEN
-from app.game import event_handler, game_actions, game, pause, title
+from app.game import event_handler, fps, Game, game, pause, title
 from app.life import Cell, Pattern
 
 
 clock = pygame.time.Clock()
-fps = 15
+
 
 life = []
 init_life = Pattern('r-pentomino', (70,40))
@@ -23,7 +23,7 @@ state = 'title'
 
 while __name__ == '__main__':
     tickFPS = clock.tick(fps)
-    pygame.display.set_caption("Press Esc to quit. FPS: %.2f" % (clock.get_fps()))
+    pygame.display.set_caption("Press Esc to quit. FPS: %.2f" % (clock.get_FPS()))
     state = event_handler(state)
     if state == 'title':
         title.draw()

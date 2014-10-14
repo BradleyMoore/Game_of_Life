@@ -2,14 +2,32 @@ import sys
 
 import pygame
 
-from interactive import Button
 from life import Cell, create_life, get_neighbors
 from scenes import GameScene, TitleScene
-from constants import HEIGHT, WIDTH, SCREEN
+from constants import HEIGHT, WIDTH, SCREEN, TO_BE_BORN, TO_LIVE
 
-# game rules
-TO_LIVE = [2, 3]
-TO_BE_BORN = [3]
+class Game(object):
+    def __init__(self):
+        self.fps = 11
+
+
+    def change_game_speed(self, change):
+        fps = fps + change 
+
+
+    def set_normal_speed():
+        fps = 11
+
+    def game_actions(old_life):
+        life = []
+
+        neighbors = get_neighbors(old_life)
+        new_life = create_life(old_life, neighbors)
+
+        for coordinate in new_life:
+            life.append(Cell(coordinate))
+
+        return life
 
 title = TitleScene((50,50,200))
 game = GameScene((150,150,150))
@@ -54,15 +72,3 @@ def click_buttons(event, state):
         name = states[state].check_buttons(pos, 'up')
         if name != None:
             return states[state].buttons[name].next_game_state
-
-
-def game_actions(old_life):
-	life = []
-
-	neighbors = get_neighbors(old_life)
-	new_life = create_life(old_life, neighbors)
-
-	for coordinate in new_life:
-	    life.append(Cell(coordinate))
-
-	return life

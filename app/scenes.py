@@ -91,28 +91,28 @@ class GameScene(Scene):
         self.buttons['out'] = Button('out', (WIDTH*.801,HEIGHT*.6),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 '-', (100,100,100,), 50,
-                                (WIDTH*.823, HEIGHT*.6), 'game')
+                                (WIDTH*.823, HEIGHT*.6), 'game', action='zoom_out')
 
         self.buttons['in'] =  Button('in', (WIDTH*.876,HEIGHT*.6),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 '+', (100,100,100,), 50,
-                                (WIDTH*.898, HEIGHT*.598), 'game')
+                                (WIDTH*.898, HEIGHT*.598), 'game', action='zoom_in')
 
         # speed controls
         self.buttons['slow'] =  Button('slow', (WIDTH*.801,HEIGHT*.675),
                                 WIDTH*.04, WIDTH*.04, (200,200,200),
                                 '<<', (100,100,100,), 28,
-                                (WIDTH*.806,HEIGHT*.685), 'game')
+                                (WIDTH*.806,HEIGHT*.685), 'game', action='slow_down')
 
         self.buttons['normal'] =  Button('normal', (WIDTH*.856,HEIGHT*.675),
                                 WIDTH*.04, WIDTH*.04, (200,200,200),
                                 '>', (100,100,100,), 28,
-                                (WIDTH*.869,HEIGHT*.685), 'game')
+                                (WIDTH*.869,HEIGHT*.685), 'game', action='normal_speed')
 
         self.buttons['fast'] =  Button('fast', (WIDTH*.906,HEIGHT*.675),
                                 WIDTH*.04, WIDTH*.04, (200,200,200),
                                 '>>', (100,100,100,), 28,
-                                (WIDTH*.915,HEIGHT*.685), 'game')
+                                (WIDTH*.915,HEIGHT*.685), 'game', action='speed_up')
 
         # movement controls
         self.buttons['pause'] = Button('pause', (WIDTH*.801,HEIGHT*.75),
