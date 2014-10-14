@@ -126,10 +126,11 @@ class GameScene(Scene):
                                 'PAUSE', (100,100,100,), 28,
                                 (WIDTH*.803, HEIGHT*.765), 'pause')
 
-        self.buttons['play'] =  Button('play', (WIDTH*.876,HEIGHT*.75),
+        # clear screen
+        self.buttons['clear'] =  Button('clear', (WIDTH*.876,HEIGHT*.75),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
-                                'PLAY', (100,100,100,), 28,
-                                (WIDTH*.884, HEIGHT*.765), 'game')
+                                'CLEAR', (100,100,100,), 28,
+                                (WIDTH*.878, HEIGHT*.765), 'game', 'clear')
 
         # exit
         self.buttons['exit'] =  Button('exit', (WIDTH*.801,HEIGHT*.825),

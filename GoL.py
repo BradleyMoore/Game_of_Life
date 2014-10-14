@@ -25,6 +25,9 @@ while __name__ == '__main__':
     elif state == 'game':
         life.extend(gamestate.new_pattern)
         gamestate.new_pattern = ''
+        if gamestate.restart == True:
+            life = []
+            gamestate.restart = False
         game.draw(life=life)
         old_life = life
         life = gamestate.game_actions(old_life)

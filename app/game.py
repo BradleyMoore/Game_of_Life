@@ -10,6 +10,7 @@ class Game(object):
     def __init__(self):
         self.fps = 11
         self.new_pattern = ''
+        self.restart = False
 
 
     def do_action(self, action):
@@ -25,6 +26,8 @@ class Game(object):
             elif action == 'zoom_in':
                 self.box = self.box*1.11
             '''
+        elif action == 'clear':
+            self.restart = True
         else:
             new_life = []
 
