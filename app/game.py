@@ -46,8 +46,8 @@ class Game(object):
 
     def change_game_speed(self, change):
         self.fps = self.fps * change
-        if self.fps < 1:
-            self.fps = 1
+        if self.fps < .5:
+            self.fps = .5
         if self.fps > 100:
             self.fps = 100
 
