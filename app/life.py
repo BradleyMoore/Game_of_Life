@@ -3,7 +3,7 @@ from collections import Counter
 import pygame
 
 from constants import BOX, HEIGHT, WIDTH, SCREEN
-
+ 
 
 class Cell(object):
 

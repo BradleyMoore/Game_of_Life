@@ -19,11 +19,11 @@ class Scene(object):
         for key in keys:
             button = self.buttons[key]
             pressed = button.check_mouse_pos(pos)
-            name = button.change_button_state(pressed, new_state)
-            if name != None:
-                return name
+            name, action = button.change_button_state(pressed, new_state)
+            if name != None or action != None:
+                return name, action
 
-        return None
+        return None, None
 
 
     def set_buttons_up(self):
@@ -88,6 +88,7 @@ class GameScene(Scene):
             self.lines.append({'color': (100,100,100), 'startx': 0, 'starty': i, 'endx': WIDTH, 'endy': i, 'width': 1})
 
         # zoom controls
+        '''
         self.buttons['out'] = Button('out', (WIDTH*.801,HEIGHT*.6),
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 '-', (100,100,100,), 50,
@@ -97,6 +98,7 @@ class GameScene(Scene):
                                 WIDTH*.07, HEIGHT*.07, (200,200,200),
                                 '+', (100,100,100,), 50,
                                 (WIDTH*.898, HEIGHT*.598), 'game', action='zoom_in')
+        '''
 
         # speed controls
         self.buttons['slow'] =  Button('slow', (WIDTH*.801,HEIGHT*.675),
@@ -130,5 +132,3 @@ class GameScene(Scene):
                                 WIDTH*.1445, HEIGHT*.07, (200,200,200),
                                 'QUIT', (100,100,100,), 28,
                                 (WIDTH*.8475, HEIGHT*.839), 'exit')
-
-

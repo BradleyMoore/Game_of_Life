@@ -1,7 +1,5 @@
 import pygame
 
-from game import change_game_speed, set_normal_speed
-
 
 class Button(object):
     def __init__(self, name, pos, width, height, color, text, text_color, text_size, text_pos, next_game_state, action=None):
@@ -18,13 +16,7 @@ class Button(object):
         self.state = 'up'
         self.next_game_state = next_game_state
         self.action = action
-        self.actions = {
-                        'zoom_out': '',
-                        'zoom_in': '',
-                        'slow_down': change_game_speed(-5),
-                        'normal_speed': set_normal_speed(),
-                        'speed_up': change_game_speed(5)
-                       }
+
 
     def check_mouse_pos(self, pos):
         if pos[0] >= self.x and pos[0] <= self.x + self.width:
@@ -37,13 +29,12 @@ class Button(object):
         if pressed == True:
             self.state = new_state
             if self.state == 'up':
-                do_action()
-            return self.name
-        return None
+                return self.name, self.action
+        return None, None
 
 
     def do_action():
-        self.actions[self.action]
+        return self.action
 
 
     def draw(self, screen):
