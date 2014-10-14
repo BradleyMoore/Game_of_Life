@@ -23,7 +23,6 @@ class Cell(object):
             pass
         else:
             pygame.draw.rect(SCREEN, self.color, (self.x*BOX, self.y*BOX, BOX, BOX))
-            print self.x*BOX, self.y*BOX
 
 
     def list_neighbors(self):
