@@ -41,7 +41,9 @@ class Scene(object):
         if 'life' in kwargs:
             if kwargs['life'] != None:
                 for cell in kwargs['life']:
-                    cell.draw()
+                    if cell.pos[0] >= 0 and cell.pos[0] <= WIDTH:
+                        if cell.pos[1] >= 0 and cell.pos[1] <= HEIGHT:
+                            cell.draw()
 
         for rect in self.rects:
             pygame.draw.rect(SCREEN, rect['color'], (rect['x'],rect['y'],rect['WIDTH'],rect['HEIGHT']), rect['stroke'])
